@@ -36,3 +36,15 @@ npm run dev
 - `app/shared`: shared contracts and runtime validation schemas.
 - `tests`: unit + integration tests.
 - `e2e`: Playwright desktop e2e scaffolding.
+
+## Troubleshooting
+
+### Native module mismatch
+
+If startup fails with a `NODE_MODULE_VERSION` mismatch (for example from `better-sqlite3`), rebuild native modules for Electron:
+
+```bash
+npm run native:rebuild:electron
+```
+
+`npm run test` rebuilds `better-sqlite3` for your system Node runtime, so launch paths that use Electron (`npm run dev`, `npm run test:e2e`, `npm run dist`) should run the Electron rebuild step afterward.
