@@ -6,15 +6,17 @@
   "type": "module",
   "main": "app/renderer/dist-electron/index.js",
   "scripts": {
-    "dev": "npm run electron:rebuild && vite",
+    "native:rebuild:electron": "electron-builder install-app-deps",
+    "native:rebuild:node": "npm rebuild better-sqlite3",
+    "dev": "npm run native:rebuild:electron && vite",
     "build": "vite build",
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json",
     "lint": "eslint . --ext .ts,.tsx",
-    "test": "npm rebuild better-sqlite3 && vitest run",
-    "test:watch": "npm rebuild better-sqlite3 && vitest",
-    "test:e2e": "playwright test",
-    "dist": "npm run electron:rebuild && npm run build && electron-builder --linux AppImage",
-    "electron:rebuild": "electron-builder install-app-deps"
+    "test": "npm run native:rebuild:node && vitest run",
+    "test:watch": "npm run native:rebuild:node && vitest",
+    "test:e2e": "npm run native:rebuild:electron && playwright test",
+    "dist": "npm run native:rebuild:electron && npm run build && electron-builder --linux AppImage",
+    "electron:rebuild": "npm run native:rebuild:electron"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",
