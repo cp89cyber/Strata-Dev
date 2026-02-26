@@ -1,0 +1,75 @@
+{
+  "name": "strata-dev",
+  "version": "0.1.0",
+  "description": "AI coding GUI desktop app",
+  "private": true,
+  "type": "module",
+  "main": "app/renderer/dist-electron/index.js",
+  "scripts": {
+    "dev": "npm run electron:rebuild && vite",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json",
+    "lint": "eslint . --ext .ts,.tsx",
+    "test": "npm rebuild better-sqlite3 && vitest run",
+    "test:watch": "npm rebuild better-sqlite3 && vitest",
+    "test:e2e": "playwright test",
+    "dist": "npm run electron:rebuild && npm run build && electron-builder --linux AppImage",
+    "electron:rebuild": "electron-builder install-app-deps"
+  },
+  "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
+    "better-sqlite3": "^12.6.2",
+    "diff": "^5.2.0",
+    "keytar": "^7.9.0",
+    "monaco-editor": "^0.52.2",
+    "openai": "^6.25.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "uuid": "^11.1.0",
+    "xterm": "^5.3.0",
+    "xterm-addon-fit": "^0.8.0",
+    "zod": "^3.24.1",
+    "zustand": "^5.0.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/diff": "^5.2.3",
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.17",
+    "@types/react-dom": "^18.3.5",
+    "@typescript-eslint/eslint-plugin": "^8.19.0",
+    "@typescript-eslint/parser": "^8.19.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^33.3.0",
+    "electron-builder": "^25.1.8",
+    "eslint": "^8.57.1",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "jsdom": "^25.0.1",
+    "playwright": "^1.52.0",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5",
+    "vite-plugin-electron": "^0.29.0",
+    "vite-plugin-electron-renderer": "^0.14.6",
+    "vitest": "^2.1.8"
+  },
+  "build": {
+    "appId": "dev.strata.desktop",
+    "productName": "Strata Dev",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**",
+      "app/renderer/dist-electron/**",
+      "package.json"
+    ],
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Development"
+    },
+    "asar": true
+  }
+}

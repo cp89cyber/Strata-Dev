@@ -1,0 +1,12 @@
+node_modules
+.vite
+.vitest
+.playwright
+playwright-report
+test-results
+dist
+dist-electron
+app/renderer/dist-electron
+release
+coverage
+*.log
