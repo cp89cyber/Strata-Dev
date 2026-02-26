@@ -12,8 +12,10 @@
     "build": "vite build",
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json",
     "lint": "eslint . --ext .ts,.tsx",
-    "test": "npm run native:rebuild:node && vitest run",
-    "test:watch": "npm run native:rebuild:node && vitest",
+    "test": "node ./scripts/run-vitest-with-native-rebuild.mjs run",
+    "test:watch": "node ./scripts/run-vitest-with-native-rebuild.mjs watch",
+    "test:core": "vitest run",
+    "test:core:watch": "vitest",
     "test:e2e": "npm run native:rebuild:electron && playwright test",
     "dist": "npm run native:rebuild:electron && npm run build && electron-builder --linux AppImage",
     "electron:rebuild": "npm run native:rebuild:electron"

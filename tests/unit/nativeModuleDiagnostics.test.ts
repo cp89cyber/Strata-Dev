@@ -33,6 +33,6 @@ describe('nativeModuleDiagnostics', () => {
     });
 
     expect(message).toContain('npm run native:rebuild:electron');
-    expect(message).toContain('npm run test rebuilds better-sqlite3');
+    expect(message).toContain('npm run test and npm run test:watch automatically restore Electron-native modules');
   });
 });

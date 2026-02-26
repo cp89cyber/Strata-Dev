@@ -47,4 +47,13 @@ If startup fails with a `NODE_MODULE_VERSION` mismatch (for example from `better
 npm run native:rebuild:electron
 ```
 
-`npm run test` rebuilds `better-sqlite3` for your system Node runtime, so launch paths that use Electron (`npm run dev`, `npm run test:e2e`, `npm run dist`) should run the Electron rebuild step afterward.
+`npm run test` and `npm run test:watch` now rebuild `better-sqlite3` for system Node before running Vitest, then automatically rebuild for Electron afterward. If you run `vitest` directly (or run `npm run native:rebuild:node` manually), run `npm run native:rebuild:electron` before launching Electron paths (`npm run dev`, `npm run test:e2e`, `npm run dist`).
+
+### Chromium GPU initialization errors on Linux
+
+If you see repeated Chromium GPU-process initialization errors (for example from `viz_main_impl.cc`) on Linux, Strata Dev now disables GPU acceleration by default on Linux to reduce startup noise and improve runtime consistency.
+
+You can override the default behavior:
+
+- `STRATA_ENABLE_GPU=1 npm run dev`: force-enable GPU acceleration (even on Linux).
+- `STRATA_DISABLE_GPU=1 npm run dev`: force-disable GPU acceleration on any platform.

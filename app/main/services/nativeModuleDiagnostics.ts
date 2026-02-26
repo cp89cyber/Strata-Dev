@@ -57,5 +57,5 @@ export const formatNativeModuleRecoveryMessage = (info: NativeModuleAbiMismatchI
     `The module was built for NODE_MODULE_VERSION ${info.compiledNodeModuleVersion}, but this runtime requires NODE_MODULE_VERSION ${info.requiredNodeModuleVersion}.`,
     'Run this command from the project root and launch again:',
     'npm run native:rebuild:electron',
-    'Note: npm run test rebuilds better-sqlite3 for your system Node runtime, so launching Electron afterward requires the Electron rebuild step again.'
+    'Note: npm run test and npm run test:watch automatically restore Electron-native modules. If you run vitest directly or run npm run native:rebuild:node manually, run the Electron rebuild command before launching again.'
   ].join('\n\n');
